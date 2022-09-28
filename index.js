@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
-const querystring = require("querystring");
+const querystring = require("query-string");
 const axios = require("axios");
 
 const app = express();
@@ -18,11 +18,6 @@ app.get("/", (req, res) => {
 	};
 
 	res.json(data);
-});
-
-app.get("/awesome-generator", (req, res) => {
-	const { name, isAwesome } = req.query;
-	res.send(`${name} is ${JSON.parse(isAwesome) ? "really" : "not"} awesome`);
 });
 
 /**
@@ -76,32 +71,16 @@ app.get("/callback", (req, res) => {
 	})
 		.then((response) => {
 			if (response.status === 200) {
-				// const { access_token, token_type } = response.data;
+				const { access_token, refresh_token } = response.data;
 
-				// axios.get('https://api.spotify.com/v1/me', {
-				//   headers: {
-				//     Authorization: `${token_type} ${access_token}`
-				//   }
-				// })
-				//   .then(response => {
-				//     res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`);
-				//   })
-				//   .catch(error => {
-				//     res.send(error);
-				//   });
+				const queryParams = querystring.stringify({
+					access_token,
+					refresh_token,
+				});
 
-				const { refresh_token } = response.data;
-
-				axios
-					.get(`http://localhost:8888/refresh_token?refresh_token=${refresh_token}`)
-					.then((response) => {
-						res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`);
-					})
-					.catch((error) => {
-						res.send(error);
-					});
+				res.redirect(`http://localhost:3000/?${queryParams}`);
 			} else {
-				res.send(response);
+				res.redirect(`/?${querystring.stringify({ error: "invalid_token" })}`);
 			}
 		})
 		.catch((error) => {
