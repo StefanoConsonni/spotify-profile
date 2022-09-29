@@ -71,11 +71,15 @@ app.get("/callback", (req, res) => {
 	})
 		.then((response) => {
 			if (response.status === 200) {
-				const { access_token, refresh_token } = response.data;
+				// redirect to our react app
+				// pass along access token & refresh token in query params
+
+				const { access_token, refresh_token, expires_in } = response.data;
 
 				const queryParams = querystring.stringify({
 					access_token,
 					refresh_token,
+					expires_in,
 				});
 
 				res.redirect(`http://localhost:3000/?${queryParams}`);

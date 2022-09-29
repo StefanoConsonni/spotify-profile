@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-
 import logo from "./logo.svg";
+
+// styles
 import "./App.css";
 
 function App() {
@@ -9,8 +10,16 @@ function App() {
 		const urlParams = new URLSearchParams(queryString);
 		const accessToken = urlParams.get("access_token");
 		const refreshToken = urlParams.get("refresh_token");
+
 		console.log(accessToken);
 		console.log(refreshToken);
+
+		if (refreshToken) {
+			fetch(`/refresh_token?refresh_token=${refreshToken}`)
+				.then((res) => res.json())
+				.then((data) => console.log(data))
+				.catch((err) => console.error(err));
+		}
 	}, []);
 
 	return (
@@ -20,7 +29,7 @@ function App() {
 				<p>
 					Edit <code>src/App.js</code> and save to reload.
 				</p>
-				<a className="App-link" href="https://localhost:8888/login">
+				<a className="App-link" href="http://localhost:8888/login">
 					Log in to Spotify
 				</a>
 			</header>
