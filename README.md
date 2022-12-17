@@ -1,6 +1,6 @@
 # Spotify Profile
 
-A web app for visualizing personalized Spotify data
+A web app for visualizing personalized Spotify data built with React, Express, and the Spotify API
 
 Built with:
 
