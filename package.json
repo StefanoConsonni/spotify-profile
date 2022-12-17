@@ -33,11 +33,6 @@
       "eslint --fix"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "dependencies": {
     "connect-history-api-fallback": "^1.6.0",
     "cookie-parser": "1.4.4",
