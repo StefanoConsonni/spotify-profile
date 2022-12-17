@@ -1,12 +1,7 @@
-import GlobalStyle from './GlobalStyle';
-import theme from './theme';
-import mixins from './mixins';
-import media from './media';
-import Button from './Button';
-import Header from './Header';
-import Nav from './Nav';
-import Main from './Main';
-import Section from './Section';
-import Footer from './Footer';
-
-export { GlobalStyle, theme, mixins, media, Button, Header, Nav, Main, Section, Footer };
+export { default as GlobalStyle } from './GlobalStyle';
+export { default as StyledDropdown } from './StyledDropdown';
+export { default as StyledGrid } from './StyledGrid';
+export { default as StyledHeader } from './StyledHeader';
+export { default as StyledRangeButtons } from './StyledRangeButtons';
+export { default as StyledSection } from './StyledSection';
+export { default as StyledTrackList } from './StyledTrackList';
